@@ -58,12 +58,12 @@ class DSN extends CI_Controller{
 		}
 
 	}	
-	public function del(){
+	public function del($data){
 		//Cek Login
 		if ($this->session->log_stat == True) {				
-		@$nip = $this->input->post('data'); //Ambil Data Nip
-		@$where = array('nip' => $nip);		// where nip => data yang diambil
-		@$hapus = $this->crud->delete($where,'dosen');	//Delete memanggil model delete
+// 		@$nip = $data; 
+		@$where = array('nip' => $data);		// where nip => data yang diambil
+		@$hapus = $this->crud->delete($where,'dosen');	// Delete memanggil model delete , dosen = nama tabel
 		if ($hapus) {
 			redirect('Dsn/msg/2');
 		}
