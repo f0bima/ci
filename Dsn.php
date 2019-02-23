@@ -2,7 +2,10 @@
 class DSN extends CI_Controller{
 	public function index(){
 		if ($this->session->log_stat == True) {			
+			//QUERY
 			$data['hasil'] = $this->crud->tampil('dosen')->result();
+			//END OF QUERY
+			//GAK PENTING
 			$data['page'] = 'Show';	
 			$data['tabel'] = 'dosen/show';	
 			$data['edit'] = 'Dsn/edt/';
@@ -11,13 +14,15 @@ class DSN extends CI_Controller{
 			$data['jdl'] = 'Data Dosen';
 			$data['input'] = 'Dsn/input';
 			$data['dsn'] = 'active';					
+			//END OF GAK PENTING
 			$this->load->view('dashboard',$data);		
 		}
 		else{
 			redirect('login');
 		}
 	}	
-	public function input(){		
+	public function input(){
+		//CEK Login
 		if ($this->session->log_stat == True) {		
 		$this->load->view('dosen/input');		
 		}
@@ -26,7 +31,9 @@ class DSN extends CI_Controller{
 		}
 	}	
 	public function add(){
+		//CEK Login
 		if ($this->session->log_stat == True) {						
+		// Query Input
 		@$data = array(
 				'nip' => preg_replace('/[^a-zA-Z0-9]/', '',$this->input->post('nip')),
 				'namadsn' => htmlspecialchars($this->input->post('nama'),ENT_QUOTES),	
@@ -34,11 +41,15 @@ class DSN extends CI_Controller{
 				'tgl' => $this->input->post('tgl'),
 				'jk' => $this->input->post('jk'),
 		);
-		@$masuk = $this->crud->tambah('dosen',$data);
+		//Cek Hasil Query
+		@$masuk = $this->crud->tambah('dosen',$data); //memanggil model input data(tambah)
+		//Proses cek Query
 		if ($masuk) {
+			//Jika Data Masuk
 			redirect('Dsn/msg/0');
 		}
 		else{			
+			//Jika Data Tidak Masuk
 			redirect('Dsn/msg/1');
 		}
 		}
@@ -48,10 +59,11 @@ class DSN extends CI_Controller{
 
 	}	
 	public function del(){
-		if ($this->session->log_stat == True) {		
-		@$nip = $this->input->post('data');
-		@$where = array('nip' => $nip);
-		@$hapus = $this->crud->delete($where,'dosen');
+		//Cek Login
+		if ($this->session->log_stat == True) {				
+		@$nip = $this->input->post('data'); //Ambil Data Nip
+		@$where = array('nip' => $nip);		// where nip => data yang diambil
+		@$hapus = $this->crud->delete($where,'dosen');	//Delete memanggil model delete
 		if ($hapus) {
 			redirect('Dsn/msg/2');
 		}
