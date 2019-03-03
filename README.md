@@ -1,4 +1,4 @@
-# ci
+
 > **edit_gambar.php**
 ---> view
 
