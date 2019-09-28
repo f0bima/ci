@@ -4,10 +4,15 @@ public class Segitiga{
      public static void main(String []args){
         Scanner inputsisi = new Scanner(System.in);
         int[] in = {5,7,3};
+        String[] sisi = {"X", "Y", "Z"};
         
         for (int i = 0; i < 3; i++) {
-            System.out.print("Masukan Sisi 1: ");
-            in[i] = inputsisi.nextInt();
+            int temp = 0;
+            do {
+                 System.out.print("Masukan Sisi " + sisi[i] +": ");
+                 temp = inputsisi.nextInt()                
+            } while (temp <=0);
+             in[i] = temp;
         }
         
         for (int i = 0; i < 2; i++) {
