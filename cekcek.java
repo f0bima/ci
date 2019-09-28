@@ -1,37 +1,46 @@
 import java.util.Scanner;
-public class Segitiga{
+import java.lang.Math; 
+public class Super_Duper{
 
      public static void main(String []args){
-        Scanner inputsisi = new Scanner(System.in);
-        int[] in = {5,7,3};
-        String[] sisi = {"X", "Y", "Z"};
+        Scanner input = new Scanner(System.in);
+        int n = 0;
+        int energi = 0;
+        int[] x;
+        int jumlahenergi = 0;
+        energi = 2*n-1;
         
-        for (int i = 0; i < 3; i++) {
-            int temp = 0;
-            do {
-                 System.out.print("Masukan Sisi " + sisi[i] +": ");
-                 temp = inputsisi.nextInt()                
-            } while (temp <=0);
-             in[i] = temp;
+        System.out.println("Masukan jumlah energi : ");
+        n = input.nextInt();
+        
+        System.out.println("Masukan energi : ");
+        String text = input.nextLine();
+        // String text = "-10 20 30";
+        String[] xx = text.split("\\s+");
+        
+        for (int i = 0; i < energi-1; i++) {
+            x[i] = Integer.parseInt(xx[i]);
         }
         
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 2-i; j++) {
-                if(in[j]>in[j+1]){
-                    int x = in[j+1];
-                    in[j+1] = in[j];
-                    in[j] = x;
+        
+        for (int i = 0; i < energi-1; i++) {
+            for (int j = 0; j < energi-1-i; j++) {
+                if(x[j] > x[j+1]){
+                    int z = x[j+1];
+                    x[j+1] = x[j];
+                    x[j] = z;
                 }
             }
         }
         
+        for (int i = 0; i < energi-1; i++) {
+            jumlahenergi = jumlahenergi+ Math.abs(x[i]);
+        }
         
-        if(in[0]+in[1]>in[2]){
-            System.out.println("True");
-        }
-        else{
-            System.out.println("False");
-        }
+        jumlahenergi = jumlahenergi + x[energi-1];
+        
+        System.out.println(jumlahenergi);
+//         System.out.println(xx[1]);
         
      }
 }
